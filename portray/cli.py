@@ -11,12 +11,20 @@ it should maintain 1:1 compatibility with the programmatic API definition in the
 """
 from pprint import pprint
 
-import hug
+import click
 from portray import api, logo
 
-cli = hug.cli(api=hug.API(__name__, doc=logo.ascii_art))
-cli(api.as_html)
-cli.output(pprint)(api.project_configuration)
-cli(api.server)
-cli(api.in_browser)
-cli(api.on_github_pages)
+@click.group()
+def cli():
+    ...
+
+@cli.command()
+@click.option("--directory", default="", help="The root folder of your project.")
+@click.option("--config_file", default="pyproject.toml", help="The [TOML](https://github.com/toml-lang/toml#toml) formatted config file you wish to use.")
+@click.option("--message", default=None, help="The commit message to use when uploading your documentation.")
+@click.option("--force", "-f", is_flag=True, default=False, help="Force the push to the repository.")
+@click.option("--ignore_version", is_flag=True, default=False, help="Ignore check that build is not being deployed with an old version.")
+@click.option("--modules", default=None, help="One or more modules to render reference documentation for")
+def on_github_pages(**kwargs) -> None:
+    """Regenerates and deploys the documentation to GitHub pages."""
+    api.on_github_pages(**kwargs)
