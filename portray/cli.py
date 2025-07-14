@@ -21,6 +21,19 @@ def cli():
 @cli.command()
 @click.option("--directory", default="", help="The root folder of your project.")
 @click.option("--config_file", default="pyproject.toml", help="The [TOML](https://github.com/toml-lang/toml#toml) formatted config file you wish to use.")
+@click.option("--port", type=int, default=8000, help="The port to expose your documentation on")
+@click.option("--host", type=str, default="127.0.0.1", help="The host to expose your documentation on")
+@click.option("--modules", default=None, help="One or more modules to render reference documentation for")
+@click.option("--reload", type=bool, default=False, help="If true the server will live load any changes")
+def in_browser(**kwargs) -> None:
+    """Opens your default webbrowser pointing to a locally started development webserver enabling
+    you to browse documentation locally.
+    """
+    api.in_browser(**kwargs)
+
+@cli.command()
+@click.option("--directory", default="", help="The root folder of your project.")
+@click.option("--config_file", default="pyproject.toml", help="The [TOML](https://github.com/toml-lang/toml#toml) formatted config file you wish to use.")
 @click.option("--message", default=None, help="The commit message to use when uploading your documentation.")
 @click.option("--force", "-f", is_flag=True, default=False, help="Force the push to the repository.")
 @click.option("--ignore_version", is_flag=True, default=False, help="Ignore check that build is not being deployed with an old version.")
