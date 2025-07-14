@@ -27,6 +27,7 @@ PORTRAY_DEFAULTS = {
 
 MKDOCS_DEFAULTS: Dict[str, Any] = {
     "site_name": os.path.basename(os.getcwd()),
+    "site_url": "",
     "config_file_path": os.getcwd(),
     "theme": {
         "name": "material",
@@ -40,6 +41,11 @@ MKDOCS_DEFAULTS: Dict[str, Any] = {
         "pymdownx.details",
         "pymdownx.highlight",
     ],
+    "validation": {
+        "absolute_links": "warn",
+        "unrecognized_links": "warn",
+        "anchors": "warn"
+    },
 }
 
 PDOCS_DEFAULTS: Dict = {"overwrite": True, "exclude_source": False}

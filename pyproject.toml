@@ -17,7 +17,7 @@ readme = "README.md"
 requires-python = ">=3.8"
 
 dependencies = [
-    "mkdocs >=1.3.0,<1.4.0",
+    "mkdocs >=1.6",
     "tmp_fat_pdocs >= v1.2.0",
     "toml >=0.10.0",
     "mkdocs-material >=7.0",
